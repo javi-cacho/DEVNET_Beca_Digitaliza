@@ -1,25 +1,27 @@
-#from time import sleep
+# Programa en Python (CALCULADORA v1.0)
+# Modelo POO
+
 from math import sqrt
+from os import system
 
 class calculadora():
     def __init__(self):
         self.POWEROFF=True
         self.opcion="q"
         self.OPCIONES={"1":"Sumar","2":"Restar","3":"Multiplicar","4":"Dividir","5":"Potencias","6":"Raiz Cuadrada","r":"REFRESCAR OPCIONES","q":"EXIT"}
-        print("        CALCULADORA ENCENDIDAr\n")
-#       sleep(1)
-        print("        Proyecto Calculadora v0.1")
+        system("cls") 
+        print("        CALCULADORA ENCENDIDA\n")
+        print("        Proyecto Calculadora v1.0")
     
     def power_off(self):
         print("\n        CALCULADORA APAGADA\n")        
         
-    def display_opciones(self):                
+    def display_opciones(self):               
         print("\nOperaciones disponibles")
         for i in self.OPCIONES.keys():            
             if not i.isdigit():
                 print("")
-            print(f"{i}.- {self.OPCIONES[i]}")
-            
+            print(f"{i}.- {self.OPCIONES[i]}")            
         
     def input_opcion(self):
         try:
@@ -122,6 +124,7 @@ class calculadora():
             return result
 
 # PROGRAM PRINCIPAL
+
 calc1=calculadora()
 calc1.display_opciones()
 calc1.opcion="r"
@@ -138,6 +141,7 @@ while calc1.opcion != "q":
         if resultado != None:
             print(f"\nEL RESULTADO ES: {resultado}")        
     elif calc1.opcion == "r" or calc1.opcion == "R":
+        system("cls")
         calc1.display_opciones()
     else:
         calc1.power_off()
