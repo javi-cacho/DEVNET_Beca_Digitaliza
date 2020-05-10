@@ -127,8 +127,8 @@ def input_crear_interface(crear_datos_interface):
 
     while not input_ok:
         try:
-            tipo_ifaz=str(input("\nIntroduzca el tipo del interface: "))            
-            nombre_ifaz=str(input("Introduzca el nombre del interface: "))
+            tipo_ifaz=str(input("\nIntroduzca el tipo de interface(GigabitEthernet, Loopback, etc...): "))            
+            nombre_ifaz=str(input("Introduzca el numero del interface: "))
             direccion_ipv4=str(input("Introduzca la direccion IPv4: "))
             mascara_ipv4=str(input("Introduzca la mascara IPv4: "))
             input_ok=de_acuerdo()
@@ -183,8 +183,8 @@ def input_borrar_interface(borrar_datos_interface):
     input_ok=False
     while not input_ok:
         try:
-            tipo_ifaz=str(input("\nIntroduzca el tipo del interface: "))            
-            nombre_ifaz=str(input("Introduzca el nombre del interface: "))
+            tipo_ifaz=str(input("\nIntroduzca el tipo de interface(GigabitEthernet, Loopback, etc...): "))            
+            nombre_ifaz=str(input("Introduzca el numero del interface: "))
             input_ok=de_acuerdo()
         except:
             input_ok=False
