@@ -1,5 +1,14 @@
 # Programa en Python (CALCULADORA v1.0)
 # Modelo POO
+# Funciones incluidas
+#       Sumar
+#       Restar
+#       Multiplicar
+#       Dicidir
+#       Potencias
+#       Raiz Cuadrada
+#
+#   Autor:Javi Cacho
 
 from math import sqrt
 from os import system

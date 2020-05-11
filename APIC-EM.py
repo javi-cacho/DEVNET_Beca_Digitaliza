@@ -6,6 +6,8 @@
 #   get_Host()              Obtiene e imprime en pantalla los Dispositivos de Red
 #   get_Interfaces()        Obtiene e imprime en pantalla los interfaces de los Dispositivos de Red
 #   get_Switch_Vlan()       Obtiene e imprime en pantalla las Vlans de los Equipos de la familia Catalyst (Switches)
+#  
+#   Autor:Javi Cacho
 
 from os import system
 from sys import exit
@@ -95,7 +97,7 @@ def get_Network_Devices(url, ticket):
                 equipo["softwareVersion"]
             ]
             Lista_equipos.append(Disp)
-            table_header=["Indice","Modelo","Hostname","Direccion de Gestion","MAC","Version SW"]
+            table_header=["Indice","Modelo","Hostname","IP Gestion","MAC","Version SW"]
         print("\n",tabulate(Lista_equipos, table_header))
     else:
         print("EL CODIGO DE ERROR ES: ", resp.status_code)
@@ -265,10 +267,6 @@ def Principal():
             menuPral(global_ticket)
         else:        
             exit()
-
-
-        
-
 
 # MAIN()
 

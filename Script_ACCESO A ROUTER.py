@@ -1,3 +1,46 @@
+# Programa en Python para acceder a Routers, para consulta y/0 configuracion, mediante distintos metodos:
+#	Netmiko
+#	RESTCONF
+#	NETCONF
+# El programa dispone de las siguientes opciones:
+#	1.- INTRODUCIR LOS DATOS DEL EQUIPO
+#		input_datos_equipo()	Solicita los datos del equipo necesarios para el resto de funciones del programa.
+#						            La direccion IP del Router
+#									El usuario de acceso al router
+#									La password de acceso al router
+#
+#	2.- OBTERNER LISTADO DE INTERFACES
+#		show_interfaces()		Obtiene la informacion de N3 y N2 de los interfaces mediante...
+#								Netmiko(sshCli.send_command)
+#								y NETCONF(get)
+#								
+#	3.- CREAR UN INTERFACE
+#		input_crear_interface(list)	Solicita los datos del interface a crear mediante la funcion crear_interface(list)
+#									Devuelve una lista con los siguientes datos:
+#										El tipo de interface(GigabitEthernet, Loopback, etc...)
+#										El numero del interface
+#										La direccion IPv4 del interface
+#										La mascara IPv4 del interface
+#
+#		crear_interface(list)		Crea un interface, mediante NETCONF(edit_config), con los datos contenidos 
+#									en la lista que pasamos como parametro.
+#									En caso de no poder crear el interface imprime en pantalla un mensae de ERROR
+#
+#	4.- BORRAR UN INTERFACE
+#		input_borrar_interface(list)Solicita los datos del interface a borrar mediante la funcion borrar_interface(list)
+#									Devuelve una lista con los siguientes datos:
+#										El tipo de interface(GigabitEthernet, Loopback, etc...)
+#										El numero del interface
+#
+#		borrar_interface(list)		Borra un interface, mediante RESTCONF(request(DELETE)), con los datos contenidos 
+#									en la lista que pasamos como parametro.
+#									En caso de no poder borrar el interface imprime en pantalla un mensae de ERROR
+#
+#	5.- OBTENER LA TABLA DE RUTAS
+#		get_routes()				Obtiene la tabla de rutas del equipo mediante NETCONF(get)
+#
+#   Autor:Javi Cacho
+
 from os import system
 from sys import exit
 import requests
@@ -27,7 +70,7 @@ def menuPral():
     DATOS ACTUALES DEL EQUIPO:(Direccion IP: {var_hostIP}, Usuario: {var_user}, Password:{var_password})
 
     1.- INTRODUCIR LOS DATOS DEL EQUIPO 
-    2.- OBTERNET LISTADO DE INTERFACES
+    2.- OBTERNER LISTADO DE INTERFACES
     3.- CREAR UN INTERFACE
     4.- BORRAR UN INTERFACE
     5.- OBTENER LA TABLA DE RUTAS
@@ -87,7 +130,7 @@ def show_interfaces():
             password=var_password,
             )
         output=sshCli.send_command("show ip int brief")
-        print("\n",format(output))
+        print("\n", format(output))
     except (NetMikoTimeoutException, AuthenticationException, SSHException):
         print("\nERROR !!! CON LOS DATOS INTRODUCIDOS NO SE HA PODIDO CONECTAR CON EL EQUIPO")
         return    
@@ -237,7 +280,7 @@ def get_routes():
             key["destination-prefix"],
             key["next-hop"]["outgoing-interface"],key["source-protocol"]]
         route_list.append(route)
-        table_header = ["Indice","Number","Type","IP"]
+        table_header = ["Indice","Prefijo","Interface Next-Hop","Protocolo"]
     print("\n",tabulate(route_list, table_header))
 
 def Principal():
